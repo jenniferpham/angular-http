@@ -10,6 +10,7 @@ import {Response} from '@angular/http';
 export class AppComponent {
   constructor(private serverService: ServerService){}
 
+  appName = this.serverService.getAppName();
   servers = [
     {
       name: 'Testserver',
@@ -42,9 +43,8 @@ export class AppComponent {
 
   onGet(){
     this.serverService.getServers().subscribe(
-      (response: Response) => {
-         const data = response.json();
-         console.log(data);
+      (servers: any[]) => {
+         this.servers = servers;
       },
       (err) => console.log(err)
     )
